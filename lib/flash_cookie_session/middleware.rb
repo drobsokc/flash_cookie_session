@@ -10,7 +10,8 @@ module FlashCookieSession
         req = Rack::Request.new(env)
         env['HTTP_COOKIE'] = [ @session_key, req.params[@session_key] ].join('=').freeze if req.params[@session_key]
         env['HTTP_ACCEPT'] = "#{req.params['_http_accept']}".freeze if req.params['_http_accept']
-      end
+	env['HTTP_ACCEPT'] = '*/*'   
+   end
 
       @app.call(env)
     end
